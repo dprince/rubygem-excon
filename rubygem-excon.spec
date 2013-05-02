@@ -2,7 +2,7 @@
 
 Summary: Http(s) EXtended CONnections
 Name: rubygem-%{gem_name}
-Version: 0.14.3
+Version: 0.20.1
 Release: 1%{?dist}
 Group: Development/Languages
 License: MIT
@@ -71,6 +71,7 @@ cp -a .%{gem_dir}/* %{buildroot}%{gem_dir}/
 %{gem_libdir}
 %exclude %{gem_cache}
 %exclude %{gem_instdir}/Gemfile
+%exclude %{gem_instdir}/Gemfile.lock
 %{gem_spec}
 %doc %{gem_instdir}/README.md
 
@@ -84,7 +85,7 @@ cp -a .%{gem_dir}/* %{buildroot}%{gem_dir}/
 
 
 %changelog
-* Thu May 2 2013 Dan Prince <dprince@redhat.com> - 0.14.3-1
+* Thu May 2 2013 Dan Prince <dprince@redhat.com> - 0.20.1-1
 - Changes to follow the latest upstream code.
 
 * Mon Jul 23 2012 Bohuslav Kabrda <bkabrda@redhat.com> - 0.14.3-1
