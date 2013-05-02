@@ -48,22 +48,22 @@ mkdir -p %{buildroot}%{gem_dir}
 cp -a .%{gem_dir}/* %{buildroot}%{gem_dir}/
 
 # fix the benchmark file not to be executable
-chmod a-x %{buildroot}%{gem_instdir}/benchmarks/has_key-vs-hash[key].rb
+#chmod a-x %{buildroot}%{gem_instdir}/benchmarks/has_key-vs-hash[key].rb
 
 # kill bundled cacert.pem
-ln -sf %{_sysconfdir}/pki/tls/cert.pem \
-	%{buildroot}%{gem_instdir}/data/cacert.pem
+#ln -sf %{_sysconfdir}/pki/tls/cert.pem \
+	#%{buildroot}%{gem_instdir}/data/cacert.pem
 
-%check
-pushd .%{gem_instdir}
+#%check
+#pushd .%{gem_instdir}
 # we need to remove the dependency on bundler and add the missing requires (workaround for not using the Rakefile)
 # do not require bundler
-sed -i -e "s/'bundler'/'open4'\nrequire 'delorean'/" -e '/Bundler.require(:default, :development)/d' tests/test_helper.rb
+#sed -i -e "s/'bundler'/'open4'\nrequire 'delorean'/" -e '/Bundler.require(:default, :development)/d' tests/test_helper.rb
 
 # require the other needed libs
 # https://github.com/geemus/excon/issues/135#issuecomment-7181061
-RUBYOPT="-r./lib/excon -rsecurerandom" shindo
-popd
+#RUBYOPT="-r./lib/excon -rsecurerandom" shindo
+#popd
 
 %files
 %dir %{gem_instdir}
@@ -84,6 +84,9 @@ popd
 
 
 %changelog
+* Thu May 2 2013 Dan Prince <dprince@redhat.com> - 0.14.3-1
+- Changes to follow the latest upstream code.
+
 * Mon Jul 23 2012 Bohuslav Kabrda <bkabrda@redhat.com> - 0.14.3-1
 - Update to Excon 0.14.3.
 
