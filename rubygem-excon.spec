@@ -1,4 +1,8 @@
+%global gem_dir %(ruby -rubygems -e 'puts Gem::dir' 2>/dev/null)
 %global gem_name excon
+%global gem_instdir %{gem_dir}/gems/%{gem_name}-%{version}
+%global gem_libdir %{gem_instdir}/lib
+%global gem_docdir %{gem_dir}/doc/%{gem_name}-%{version}
 
 Summary: Http(s) EXtended CONnections
 Name: rubygem-%{gem_name}
@@ -11,15 +15,15 @@ Source0: http://rubygems.org/gems/%{gem_name}-%{version}.gem
 Requires: ruby(abi) = 1.9.1
 Requires: ruby(rubygems)
 Requires: ca-certificates
-BuildRequires: rubygems-devel
+BuildRequires: rubygems
 BuildRequires: ca-certificates
 # For the tests
-BuildRequires: rubygem(activesupport)
-BuildRequires: rubygem(delorean)
-BuildRequires: rubygem(open4)
-BuildRequires: rubygem(shindo)
-BuildRequires: rubygem(sinatra)
-BuildRequires: rubygem(eventmachine)
+#BuildRequires: rubygem(activesupport)
+#BuildRequires: rubygem(delorean)
+#BuildRequires: rubygem(open4)
+#BuildRequires: rubygem(shindo)
+#BuildRequires: rubygem(sinatra)
+#BuildRequires: rubygem(eventmachine)
 BuildArch: noarch
 Provides: rubygem(%{gem_name}) = %{version}
 
@@ -69,11 +73,11 @@ cp -a .%{gem_dir}/* %{buildroot}%{gem_dir}/
 %dir %{gem_instdir}
 %{gem_instdir}/data
 %{gem_libdir}
-%exclude %{gem_cache}
 %exclude %{gem_instdir}/Gemfile
 %exclude %{gem_instdir}/Gemfile.lock
-%{gem_spec}
 %doc %{gem_instdir}/README.md
+%{gem_dir}/cache/%{gem_name}-%{version}.gem
+%{gem_dir}/specifications/%{gem_name}-%{version}.gemspec
 
 %files doc
 %{gem_instdir}/benchmarks
@@ -82,7 +86,6 @@ cp -a .%{gem_dir}/* %{buildroot}%{gem_dir}/
 %{gem_instdir}/Rakefile
 %doc %{gem_docdir}
 %doc %{gem_instdir}/changelog.txt
-
 
 %changelog
 * Thu May 2 2013 Dan Prince <dprince@redhat.com> - 0.20.1-1
