@@ -8,7 +8,8 @@ Group: Development/Languages
 License: MIT
 URL: https://github.com/geemus/excon
 Source0: http://rubygems.org/gems/%{gem_name}-%{version}.gem
-Requires: ruby(abi) = 1.9.1
+#Requires: ruby(abi) = 1.9.1
+Requires: ruby
 Requires: ruby(rubygems)
 Requires: ca-certificates
 BuildRequires: rubygems-devel
@@ -85,6 +86,9 @@ cp -a .%{gem_dir}/* %{buildroot}%{gem_dir}/
 
 
 %changelog
+* Fri Aug 23 2013 Dan Prince <dprince@redhat.com> - 0.20.1-1
+- Updates to build on Fedora 19.
+
 * Thu May 2 2013 Dan Prince <dprince@redhat.com> - 0.20.1-1
 - Changes to follow the latest upstream code.
 
